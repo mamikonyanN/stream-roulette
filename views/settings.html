@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+<!--suppress HtmlUnknownTag, CheckEmptyScriptTag -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Settings</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 </head>
 <body>
@@ -22,7 +23,36 @@
 
     <v-main>
       <v-container>
-        Settings form
+        <v-form v-model="settingsForm" ref="settingsForm">
+          <v-row>
+            <v-col cols="12" sm="4">
+              <v-text-field
+                  :append-icon="tokenShow ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required]"
+                  :type="tokenShow ? 'text' : 'password'"
+                  v-model="token"
+                  hint="DonationAlerts token"
+                  label="Token"
+                  @click:append="tokenShow = !tokenShow"
+              />
+            </v-col>
+            <v-col cols="12" sm="4">
+              <v-text-field type="number" :rules="[rules.required, rules.min]" v-model="goal" label="Donate goal" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
+              <v-combobox :rules="[rules.task]" v-model="tasks" multiple chips deletable-chips label="Tasks" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" class="text-right">
+              <v-btn tile outlined @click.prevent="save()">Сохранить</v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
+        <v-snackbar v-model="success" :timeout="1500" right color="success">Сохранено</v-snackbar>
+        <v-snackbar v-model="error" :timeout="2000" right color="error">Не сохранено</v-snackbar>
       </v-container>
     </v-main>
   </v-app>

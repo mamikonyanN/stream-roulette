@@ -1,7 +1,4 @@
-exports.getSettings = function (request, response) {
-  response.send('Test')
-}
+const database = require('../config/database')
 
-exports.saveSettings = function (request, response) {
-
-}
+exports.getSettings = (request, response) => response.send(database.get([ 'token', 'goal', 'tasks' ]))
+exports.saveSettings = (request, response) => response.send(database.set(request.body))

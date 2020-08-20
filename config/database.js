@@ -3,10 +3,18 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
 const database = low(adapter)
 
-database.defaults({}).write()
+database.defaults({
+  // settings
+  token: '',
+  tasks: [],
+  goal: 100
+}).write()
 
 function get (requiredFields = []) {
-  return requiredFields.reduce((result, field) => result.curr = database.get(field), {})
+  return requiredFields.reduce((result, field) => {
+    result[field] = database.get(field).value()
+    return result
+  }, {})
 }
 
 function set (data = {}) {
