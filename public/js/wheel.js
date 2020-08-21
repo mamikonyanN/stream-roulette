@@ -4,8 +4,8 @@ let diameter = 500
 
 anime.set('.wrapper', { opacity: 0 })
 
-function test (actionsLength = 5, startAngle = 0, endAngle = (360 * 5) + 240, rotateDuration = 5000, pause = 2000) {
-  rotate({ actionsLength, startAngle, endAngle, rotateDuration, pause })
+function test (tasksLength = 5, startAngle = 0, endAngle = (360 * 5) + 240, rotateDuration = 5000, pause = 2000) {
+  rotate({ tasksLength, startAngle, endAngle, rotateDuration, pause })
 }
 
 window.addEventListener('resize', calculateSize)
@@ -19,7 +19,7 @@ function calculateSize () {
 function rotate (data) {
   animationQueue.push(data)
   if(!!anime.running.length) return
-  printActions(data.actionsLength)
+  printTasks(data.tasksLength)
   anime.set('.wheel', { rotate: data.startAngle })
   appear()
 }
@@ -31,7 +31,7 @@ async function spin (data) {
     duration: data.rotateDuration,
     endDelay: data.pause,
     easing: 'cubicBezier(.3, 0, .1, 1)',
-    begin: () => printActions(data.actionsLength)
+    begin: () => printTasks(data.tasksLength)
   }).finished
   if(animationQueue.length) await spin(animationQueue.shift())
   else await disappear()
@@ -56,15 +56,15 @@ async function disappear () {
 }
 
 
-function printActions (actionsLength) {
+function printTasks (tasksLength) {
   wheel.innerHTML = ''
 
   const radius = diameter / 2
-  const angle = 360 / actionsLength
+  const angle = 360 / tasksLength
 
-  for (let index = 0; index < actionsLength; index++) {
+  for (let index = 0; index < tasksLength; index++) {
     wheel.appendChild(createTaskTitle({ radius, angle, index }))
-    if(actionsLength !== 1)
+    if(tasksLength !== 1)
       wheel.appendChild(createBorder({ radius, angle, index }))
   }
 }

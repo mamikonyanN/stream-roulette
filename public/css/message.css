@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: #00ff00;
+    overflow: hidden;
+}
+
+:root {
+    /** Variables */
+    --box-background: black;
+    --border-color: #fe0178;
+    --border-size: 10px;
+    --font: 'Roboto';
+    --font-size: 50px;
+    --text-color: white;
+    --shadow-color: black;
+
+    font-family: var(--font), serif;
+    font-size: var(--font-size);
+    color: var(--text-color);
+}
+
+.message {
+    padding: 5px;
+    background: var(--box-background);
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    border: var(--border-color) solid var(--border-size);
+}
