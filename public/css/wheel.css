@@ -10,15 +10,16 @@ html {
 }
 
 :root {
-    font-size: 5vmin;
-    font-family: 'Roboto', serif;
-
     /** Variables */
     --wheel-background: linear-gradient(#f64f59, #c471ed, #12c2e9);
     --title-color: white;
     --title-shadow-color: black;
+    --title-font: 'Roboto';
     --border-color: white;
     --border-size: 1px;
+
+    font-size: 5vmin;
+    font-family: var(--title-font), serif;
 }
 
 .wrapper {

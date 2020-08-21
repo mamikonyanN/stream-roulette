@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: #0f0;
+    overflow: hidden;
+}
+
+:root {
+    /** Variables */
+    --box-background: black;
+    --slider-backgroynd: linear-gradient(90deg, #fe0178, #02d0fc);
+    --font: 'Roboto';
+    --text-color: white;
+    --shadow-color: black;
+
+    font-family: var(--font), serif;
+}
+
+.status {
+    position: relative;
+    background: var(--box-background);
+}
+
+.bar {
+    position: absolute;
+    height: 100%;
+    width: 0;
+    background: var(--slider-backgroynd);
+}
+
+.current {
+    color: var(--text-color);
+    text-shadow: 0.5px 0.5px 1px var(--shadow-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
