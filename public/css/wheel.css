@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: #00ff00;
+    overflow: hidden;
+}
+
+:root {
+    font-size: 5vmin;
+    font-family: 'Roboto', serif;
+
+    /** Variables */
+    --wheel-background: linear-gradient(#f64f59, #c471ed, #12c2e9);
+    --title-color: white;
+    --title-shadow-color: black;
+    --border-color: white;
+    --border-size: 1px;
+}
+
+.wrapper {
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    background-size: cover;
+    border: var(--border-color) var(--border-size) solid;
+    background: var(--wheel-background) center center no-repeat;
+}
+
+.pointer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 5%;
+    height: 5%;
+    transform: translateX(-50%);
+    fill: var(--border-color);
+}
+
+.number {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform-origin: 0 100%;
+
+    color: var(--title-color);
+    text-shadow: 0.5px 0.5px 1px var(--title-shadow-color);
+}
+
+.border {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform-origin: 0 100%;
+
+    width: var(--border-size);
+    background: var(--border-color);
+}
