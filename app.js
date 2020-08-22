@@ -6,7 +6,6 @@ const PORT = process.env.PORT || 3000
 const appRouter = require('./routes.js')
 
 require('./config/tray')
-require('./config/database')
 
 app.use(bodyParser.json())
 app.use(express.static('./public'))

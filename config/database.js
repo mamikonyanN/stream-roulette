@@ -7,7 +7,13 @@ database.defaults({
   // settings
   token: '',
   tasks: [],
-  goal: 100
+  goal: 100,
+  // roulette customisation
+  rotateDuration: 5000,
+  pause: 2000,
+  // roulette
+  current: 0,
+  angle: 0
 }).write()
 
 function get (requiredFields = []) {

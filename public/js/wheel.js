@@ -4,12 +4,17 @@ let diameter = 500
 
 anime.set('.wrapper', { opacity: 0 })
 
-function test (tasksLength = 5, startAngle = 0, endAngle = (360 * 5) + 240, rotateDuration = 5000, pause = 2000) {
-  rotate({ tasksLength, startAngle, endAngle, rotateDuration, pause })
-}
-
 window.addEventListener('resize', calculateSize)
 calculateSize()
+
+let eventSource = new EventSource('/event/wheel')
+eventSource.onmessage = function (event) {
+  try {
+    const data = JSON.parse(event.data)
+    rotate(data)
+  } catch (e) {
+  }
+}
 
 function calculateSize () {
   diameter = Math.min(window.innerHeight, window.innerWidth)
@@ -31,7 +36,14 @@ async function spin (data) {
     duration: data.rotateDuration,
     endDelay: data.pause,
     easing: 'cubicBezier(.3, 0, .1, 1)',
-    begin: () => printTasks(data.tasksLength)
+    begin: () => {
+      printTasks(data.tasksLength)
+      fetch('/event/message', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
   }).finished
   if(animationQueue.length) await spin(animationQueue.shift())
   else await disappear()

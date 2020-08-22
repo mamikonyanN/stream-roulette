@@ -1,9 +1,13 @@
 window.addEventListener('resize', calculateSize)
 calculateSize()
-updateValue({ current: 0 })
 
-function test (isWin = true, current = 300, goal = 500) {
-  startChain({ isWin, current, goal })
+let eventSource = new EventSource('/event/bar')
+eventSource.onmessage = function (event) {
+  try {
+    const data = JSON.parse(event.data)
+    startChain(data)
+  } catch (e) {
+  }
 }
 
 function calculateSize () {
